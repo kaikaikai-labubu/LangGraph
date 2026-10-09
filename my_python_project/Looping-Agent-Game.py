@@ -34,14 +34,13 @@ def hint(state: AgentState) -> AgentState:
         state["lower_bound"] = state["guess"]
     else:
         print(f"Lower than {state['guess']}")
-        state["upper_bound"] = state["guess"]
-    
+        state["upper_bound"] = state["guess"]    
     return "continue"
 
 graph = StateGraph(AgentState)
 graph.add_node("setup_node", setup)
 graph.add_node("guess_node", guess)
-graph.add_node("hint_node", hint)
+graph.add_node("hint_node", lambda state: state)
 
 graph.add_edge("setup_node", "guess_node")
 graph.add_edge("guess_node", "hint_node")
